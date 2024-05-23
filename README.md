@@ -33,7 +33,11 @@ Follow these steps to set up the project on your local machine:
     Lancaster Brewery <-> Loughborough University
     Lancaster Castle <-> Loughborough University
     Lancaster Brewery <-> Lancaster University
-5. **Error in Program:**
+5. **If response is empty:**
+    The below log will be displayed
+    ```sh
+    No data available
+6. **Error in Program:**
     In case there are any error in function, it will be thrown with below prefix
     ```sh
     ERROR!!! --> 

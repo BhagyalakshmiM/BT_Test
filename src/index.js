@@ -11,7 +11,8 @@ const fetchData = async (URL) => {
 const main = () => {
     const resultData = fetchData("https://my-json-server.typicode.com/marcuzh/router_location_test_api/db");
     resultData.then((result) => {
-        GetConnectionsList(result);
+        // checking if result has data or empty object
+        Object.keys({}).length === 0 ? console.log('No data available') : GetConnectionsList(result);
     })
     // Logs error if there are any error in fetch or any issue which execution.
     .catch((err) => { console.log(`ERROR!!! --> ${err}`)});
