@@ -1,4 +1,4 @@
-# Node.js Project for BT_Test
+# Node.js Project
 
 ## Project Description
 
@@ -26,10 +26,14 @@ Follow these steps to set up the project on your local machine:
 3. **Run the Node.js File:**
     ```sh
     node index.js
-3. **Verify Output:**
+4. **Verify Output:**
     After running the command, you should see the output of Node.js application in the terminal as below
     ```sh
     Birmingham Hippodrome <-> Williamson Park
     Lancaster Brewery <-> Loughborough University
     Lancaster Castle <-> Loughborough University
     Lancaster Brewery <-> Lancaster University
+5. **Error in Program:**
+    In case there are any error in function, it will be thrown with below prefix
+    ```sh
+    ERROR!!! --> 

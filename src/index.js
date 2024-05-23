@@ -14,7 +14,7 @@ const main = () => {
         GetConnectionsList(result);
     })
     // Logs error if there are any error in fetch or any issue which execution.
-    .catch((err) => { console.log(`${err}`)});
+    .catch((err) => { console.log(`ERROR!!! --> ${err}`)});
 }
 
 // this returns final result connections list
@@ -26,7 +26,7 @@ const GetConnectionsList = (data) => {
     locations.forEach(location => {
         locationNameMap.set(location.id,location.name);
     });
-    // Set() data structure makes sure there are no dublicates stored in connections.
+    // Set() data structure makes sure there are no duplicates stored in connections.
     const connections = new Set();
     // looping through routers array
     routers.forEach(router => {
@@ -39,7 +39,7 @@ const GetConnectionsList = (data) => {
         const linkedLocation = locationNameMap.get(linkedRouter.location_id);
         // checking if current & linkedLocation are different
         if (currentLocation !== linkedLocation) {
-          // the locationNames sorted to make sure Set() can eliminate dublication from final array.
+          // the locationNames sorted to make sure Set() can eliminate duplicate elements from final array.
           const connection = [currentLocation, linkedLocation].sort().join(' <-> ');
           connections.add(connection);
         }
