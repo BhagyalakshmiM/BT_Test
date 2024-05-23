@@ -18,7 +18,7 @@ const main = () => {
 }
 
 // this returns final result connections list
-function GetConnectionsList(data) {
+const GetConnectionsList = (data) => {
     // destructured the response from fetch call
     const { locations, routers } = data;
     // Map() data structure makes it easier to store data (set()) in key value pairs and access it using get() function.
@@ -45,9 +45,9 @@ function GetConnectionsList(data) {
         }
       });
     });
+    // Displaying each connection in log.
     connections.forEach(connection => {
       console.log(connection);
     });
   };
-
   main();
