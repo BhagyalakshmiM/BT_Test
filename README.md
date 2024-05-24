@@ -19,25 +19,37 @@ Follow these steps to set up the project on your local machine:
 
    ```sh
    git clone https://github.com/BhagyalakshmiM/BT_Test.git
-2. **Navigate to the Project Directory:**
+## Running Code
+
+1. **Navigate to the Project Directory:**
     Change your directory to the project folder
     ```sh
     cd BT_Test/src
-3. **Run the Node.js File:**
+2. **Run the Node.js File:**
     ```sh
     node index.js
-4. **Verify Output:**
+3. **Verify Output:**
     After running the command, you should see the output of Node.js application in the terminal as below
     ```sh
     Birmingham Hippodrome <-> Williamson Park
     Lancaster Brewery <-> Loughborough University
     Lancaster Castle <-> Loughborough University
     Lancaster Brewery <-> Lancaster University
-5. **If response is empty:**
+4. **If response is empty:**
     The below log will be displayed
     ```sh
     No data available
-6. **Error in Program:**
+5. **Error in Program:**
     In case there are any error in function, it will be thrown with below prefix
     ```sh
     ERROR!!! --> 
+## Testing Code
+
+1. **Navigate to the Project Directory:**
+    Change your directory to the project folder
+    ```sh
+    cd BT_Test/src
+2. **Run the Node.js File:**
+    Sample data can be added in testWithData.js file and tested
+    ```sh
+    node testWithData.js
