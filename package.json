@@ -1,0 +1,24 @@
+{
+  "name": "bt_test",
+  "version": "1.0.0",
+  "description": "This project produces the list of connection between locations using routers, router links and locations data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node testWithData.js",
+    "start": "node index.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhagyalakshmiM/BT_Test.git"
+  },
+  "keywords": [
+    "npm",
+    "node"
+  ],
+  "author": "Bhagyalakshmi Mangalore",
+  "bugs": {
+    "url": "https://github.com/BhagyalakshmiM/BT_Test/issues"
+  },
+  "homepage": "https://github.com/BhagyalakshmiM/BT_Test#readme"
+}
