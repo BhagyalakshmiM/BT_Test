@@ -1,54 +1,56 @@
-// fetch call made to given URL and return result
+// fetch call makes API call and return result.
 // Note: fetch built-in API call returns promise object so async await is been used.
 const fetchData = async (URL) => {
-    const responsePromise = await fetch(URL);
-    const data = await responsePromise.json();
-    return data;
+  const responsePromise = await fetch(URL);
+  const data = await responsePromise.json();
+  return data;
 }
 
-// main function is called initially to make api call
-// waits for the data to call GetConnectionsList to execute the logic on it.
+/* main function is called initially to make api call
+   waits for the data to return to invoke GetLocationLinks to execute the logic. */
 const main = () => {
-    const resultData = fetchData("https://my-json-server.typicode.com/marcuzh/router_location_test_api/db");
-    resultData.then((result) => {
-        // checking if result has data or empty object
-        Object.keys({}).length === 0 ? console.log('No data available') : GetConnectionsList(result);
-    })
+  const resultData = fetchData("https://my-json-server.typicode.com/marcuzh/router_location_test_api/db");
+  resultData.then((result) => {
+    // checking if result has data or empty object
+    Object.keys({ result }).length === 0 ? console.log('No data available') : GetLocationLinks(result);
+  })
     // Logs error if there are any error in fetch or any issue which execution.
-    .catch((err) => { console.log(`ERROR!!! --> ${err}`)});
+    .catch((err) => { console.log(`ERROR!!! --> ${err}`) });
 }
 
-// this returns final result connections list
-const GetConnectionsList = (data) => {
-    // destructured the response from fetch call
-    const { locations, routers } = data;
-    // Map() data structure makes it easier to store data (set()) in key value pairs and access it using get() function.
-    const locationNameMap = new Map();
-    locations.forEach(location => {
-        locationNameMap.set(location.id,location.name);
+// GetLocationLinks function executed the logic and returns final result locationLinks list
+const GetLocationLinks = (data) => {
+  // destructured the response from fetch call
+  const { locations, routers } = data;
+  /* Creating new object to store location id & name as key value pairs,
+  to avoid loop through location list objects to get location name from id. */
+  const locIdNameObj = {};
+  locations.forEach(location => {
+    locIdNameObj[location.id] = location.name;
+  });
+  const locationLinks = [];
+  // looping through routers array
+  routers.forEach(router => {
+    const currentLocation = locIdNameObj[router.location_id];
+    // looping through routers_link array
+    router.router_links.forEach(id => {
+      // find() function returns first element id matched in routers array with router_links id.
+      const linkedRouter = routers.find(r => r.id === id);
+      // getting the linkedLocation using linkedRouter
+      const linkedLocation = locIdNameObj[linkedRouter.location_id];
+      // checking if current & linkedLocation are different
+      if (currentLocation !== linkedLocation) {
+        // the locations are sorted and joined with <->, sorted so that the duplicated could be removed using Set()
+        const locationLink = [currentLocation, linkedLocation].sort().join(' <-> ');
+        locationLinks.push(locationLink);
+      }
     });
-    // Set() data structure makes sure there are no duplicates stored in connections.
-    const connections = new Set();
-    // looping through routers array
-    routers.forEach(router => {
-      const currentLocation = locationNameMap.get(router.location_id);
-      // looping through routers_link array
-      router.router_links.forEach(routerLinkId => {
-        // find() function returns first element matched in routers array with routerLinkId
-        const linkedRouter = routers.find(r => r.id === routerLinkId);
-        // getting the linkedLocation using linkedROuter
-        const linkedLocation = locationNameMap.get(linkedRouter.location_id);
-        // checking if current & linkedLocation are different
-        if (currentLocation !== linkedLocation) {
-          // the locationNames sorted to make sure Set() can eliminate duplicate elements from final array.
-          const connection = [currentLocation, linkedLocation].sort().join(' <-> ');
-          connections.add(connection);
-        }
-      });
-    });
-    // Displaying each connection in log.
-    connections.forEach(connection => {
-      console.log(connection);
-    });
-  };
-  main();
+  });
+  // Set() is used to eliminate duplicate elements from final array
+  [...new Set(locationLinks)].forEach(locationLink => {
+    console.log(locationLink);
+  });
+};
+
+// This is the root function call to start the execution.
+main();
